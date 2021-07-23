@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.BART-Smells-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .BART-Smells-logo {
+    animation: App-logo-move infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-move {
+  from {
+    transform: translate(0, -50vh);
+  }
+  to {
+    transform: translate(0, 50vh);
+  }
+}

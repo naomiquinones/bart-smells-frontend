@@ -1,0 +1,26 @@
+{
+  "short_name": "BART Smells",
+  "name": "BART Smells app",
+  "description": "A Capstone Project For Ada Developers Academy",
+  "icons": [
+    {
+      "src": "icons/favicon.svg",
+      "sizes": "1024x1024 256x256 72x72 64x64 32x32 24x24 16x16",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "icons/google-touch-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}
