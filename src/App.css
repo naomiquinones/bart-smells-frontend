@@ -1,38 +1,190 @@
 .App {
+  text-align: left;
+  /* new below */
+  perspective: 400px;
+  perspective-origin: 0% 0%;
+  font-size: 2em;
+}
+
+.App-nav {
+  background-color: var(--app-blue);
+}
+.App-nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+}
+.App-nav li {
+  display: inline-block;
+  width: 50%;
   text-align: center;
 }
-
-.BART-Smells-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App-nav a {
+  text-decoration: none;
+  display: block;
+  padding: 1rem 0;
+  font-size: 2rem;
+  color: var(--app-white);
+  font-weight: bold;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .BART-Smells-logo {
-    animation: App-logo-move infinite 20s linear;
-  }
+.App-nav a:hover {
+  background-color:var(--app-green);
 }
 
 .App-header {
-  background-color: #f2f2f2;
-  min-height: 100vh;
+  background-color: var(--app-white);
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* justify-content: center; */
+  position: relative;
+  z-index: -1;
 }
 
-.App-link {
-  color: #61dafb;
+.BART-Smells-logo {
+  position: absolute;
+  height: 25vh;
+  pointer-events: none;
+  transform: translate(0, 69vh);
+  margin: 0 auto;
+}
+.fly, .fly2 {
+  width: 50%;
+  z-index: inherit;
+  position: absolute;
+}
+.fly {
+  stroke: var(--app-green);
+  transform-origin: 25% 50%;
+  transform: 
+    perspective(0) 
+    translate3d(-50px,40px,60px) 
+    scale3d(.5,.5,.5)
+    rotate3d(0.25,0.5,0.5,0deg)
+    rotateY(0deg)
+    rotate(90deg);
+  transform-style: preserve-3d;
+  left: 0;
+  top: 0;
+  animation: moveFly 5s linear infinite;
+}
+.fly2 {
+  transform-origin: center bottom 0;
+  animation: circleFly 8s linear infinite;
+}
+.fly2Box {
+  position: absolute;
+  z-index: -1;
+  left: 30vw;
+  top: 20vh;
+  width: 40vmin;
+  height: 40vmin;
+  animation: flipFlyBox 8s linear infinite;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-weight: lighter;
+  color: var(--app-brown-dark);
+}
+main {
+  margin-top: 2rem;
+  padding: 0 2rem;
+}
+tr {
+  font-size: .5em;
+  padding: .25em 0;
+  border-bottom: 1px solid var(--app-brown);
+}
+form {
+  border: 1px solid var(--app-green);
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 2rem;
+}
+label {
+  color: var(--app-brown);
+  display: block;
+}
+input, textarea {
+  background-color: var(--app-white);
+  width: 100%;
+  margin-bottom: .75rem;
+  border: 1px solid var(--app-grey);
+  height: 2.25rem;
+}
+button[type="submit"] {
+  width: 100%;
+}
+@media (min-width: 700px) {
+  .fly2Box {
+    left: 20vw;
+    top: 20vh;
+    width: 30vmin;
+    height: 30vmin;
+  }  
+  form {
+    width: 60%;
+  }
+}
+@media (min-width: 1200px) {
+  .fly2Box {
+    left: 70vw;
+    top: 12.5vh;
+    width: 20vmin;
+    height: 20vmin;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .BART-Smells-logo {
+    animation: App-logo-move 20s linear;
+    animation-iteration-count: 1;
+  }
 }
 
+/* Animation */
 @keyframes App-logo-move {
   from {
-    transform: translate(0, -50vh);
+    height: 50vh;
+    /* z-index: 100; */
+    transform: translate(0, 0vh);
   }
   to {
-    transform: translate(0, 50vh);
+    height: 25vh;
+    transform: translate(0, 69vh);
+  }
+}
+
+@keyframes moveFly {
+  from {
+    transform: rotate3d(0,0.5,0,0deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+  }
+  25% {
+    transform: rotate3d(0,0.5,0,-90deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+  }
+  50% {
+    transform: rotate3d(0,0.5,0,-180deg) scale3d(.5,1,.5) translate3d(-10px,20%,0px);
+  }
+  75% {
+    transform: rotate3d(0,0.5,0,-270deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+  }
+  to {
+    transform: rotate3d(0,0.5,0,-360deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+  }
+}
+
+@keyframes circleFly {
+  100% {
+    transform: rotateZ(-2turn);
+  }
+ }
+ @keyframes flipFlyBox {
+    25% {
+      tranform: rotateX(0.5turn);
+    }
+    75% {
+      transform: rotateX(0.5turn);
   }
 }

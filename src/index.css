@@ -1,3 +1,17 @@
+:root {
+  /* Make color variables */
+  --app-blue: #1099d6;
+  --app-green: #b6ac3f;
+  --app-brown: #a66c2f;
+  --app-brown-dark: #7b471a;
+  --app-white: #f2f2f2;
+  --app-gray: #9b9b9b;
+  --app-black: #222222;
+}
+html, body {
+    height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +19,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Source Sans Pro', sans-serif;
+
 }
 
 code {
