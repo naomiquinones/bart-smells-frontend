@@ -1,0 +1,117 @@
+form, fieldset, label, select, input, textarea, button {
+  border-radius: var(--corners);
+}
+form, fieldset, select, input, textarea, button {
+  border: 1px solid var(--app-gray-superlight-tr);
+}
+form {
+  border: 1px solid var(--app-blue);
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
+  color: var(--app-brown);
+}
+fieldset {
+  padding: 0 0 1rem;
+}
+
+legend {
+  margin-left: 0;
+  padding-left: 0;
+  font-size: 2rem;
+}
+select {
+  color: var(--app-white);
+  font-weight: bold;
+  border: 1px solid var(--app-green);
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  line-height: 1.25;
+  width: 100%;
+  padding: .5em .75em;
+  outline: none;
+  background-color: var(--app-white-tr);
+  background-image: linear-gradient(45deg, var(--app-brown-dark-tr), var(--app-green-tr));
+  box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+}
+input, textarea {
+  background-color: var(--app-white);
+  padding: .5em;
+  width: 100%;
+  margin-bottom: .75rem;
+  border: 1px solid var(--app-grey);
+  line-height: 2.25rem;
+  color: var(--app-brown);
+  font-size: 1rem;
+}
+textarea {
+  height: 5.5rem;
+}
+button[type="submit"] {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-top: .5em;
+}
+label:first-child {
+  margin-top: 0;
+}
+input[type="radio"]{
+  appearance: none;
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-button-label.radio-type-select {
+  display: inline-block;
+  width: 21%;
+  margin: 0 2%;
+  padding: .5em;
+  border: 1px solid var(--app-blue);
+}
+.radio-button-label.radio-type-select:last-child {
+  margin-right: 0;
+}
+input[type="radio"]:checked + .radio-button-label.radio-type-select {
+  background: linear-gradient(45deg, var(--app-blue), var(--app-green));
+  border-color:var(--app-green);
+  color: var(--app-white);
+}
+
+button[type="submit"] {
+  background: radial-gradient(circle, var(--app-gray-superlight), var(--app-brown));
+  padding: 1.5rem .5rem;
+  color: var(--app-brown-dark);
+  font-size: 2rem;
+  font-weight: bold;
+  border-color: var(--app-brown-tr);
+}
+button[type="submit"]:hover, button[type="submit"]:focus {
+  background: radial-gradient(circle, var(--app-green), var(--app-blue));
+  color: var(--app-white);
+  border-color: var(--app-blue-tr);
+}
+@media (min-width: 640px) {
+  form {
+    width: 90%;
+  }
+}
+@media (min-width: 700px) {
+  form {
+    width: 80%;
+  }
+}
+@media (min-width: 960px) {
+  form {
+    width: 70%;
+  }
+}
+@media (min-width: 1100px) {
+  form {
+    width: 60%;
+  }
+}

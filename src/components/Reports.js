@@ -32,8 +32,8 @@ const Reports = () => {
             <th>Date</th>
             <th>Type</th>
             <th>Description</th>
-            <th>Train</th>
-            <th>Direction</th>
+            <th>Route</th>
+            <th>Destination</th>
             <th>Car&nbsp;#</th>
             <th>Votes</th>
           </tr>

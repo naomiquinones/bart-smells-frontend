@@ -7,8 +7,8 @@ const Row = (props) => {
       <td>{props.report.date}</td>
       <td>{props.report.type}</td>
       <td>{props.report.description}</td>
-      <td>{props.report.train}</td>
-      <td>{props.report.direction}</td>
+      <td>{props.report.route}</td>
+      <td>{props.report.destination}</td>
       <td>{props.report.car_number}</td>
       <td>{props.report.votes}</td>
     </tr>

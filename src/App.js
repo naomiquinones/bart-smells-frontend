@@ -1,4 +1,7 @@
 import './App.css';
+import logo from './images/logo.svg';
+import fly from './images/fly.svg';
+
 import Home from './components/Home';
 import Reports from './components/Reports';
 
@@ -10,6 +13,11 @@ function App() {
   return (
     <Router>
     <div className="App">
+      <header className="App-header">
+        <img src={fly} className="fly" alt="a fly" />
+        <img src={logo} className="BART-Smells-logo" alt="logo" />
+        <span className="fly2Box"><img src={fly} className="fly2" alt="another fly" /></span>
+      </header>
       <nav className="App-nav">
         <ul>
           <li><Link to="/">Home</Link></li>

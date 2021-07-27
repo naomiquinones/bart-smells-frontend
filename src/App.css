@@ -69,11 +69,9 @@
   transform-style: preserve-3d;
   left: 0;
   top: 0;
-  animation: moveFly 5s linear infinite;
 }
 .fly2 {
   transform-origin: center bottom 0;
-  animation: circleFly 8s linear infinite;
 }
 .fly2Box {
   position: absolute;
@@ -82,7 +80,6 @@
   top: 20vh;
   width: 40vmin;
   height: 40vmin;
-  animation: flipFlyBox 8s linear infinite;
 }
 h1,h2,h3,h4,h5,h6 {
   font-weight: lighter;
@@ -92,27 +89,6 @@ main {
   margin-top: 2rem;
   padding: 0 2rem;
 }
-form {
-  border: 1px solid var(--app-green);
-  width: 90%;
-  margin: 1rem auto;
-  padding: 1rem;
-  font-size: 2rem;
-}
-label {
-  color: var(--app-brown);
-  display: block;
-}
-input, textarea {
-  background-color: var(--app-white);
-  width: 100%;
-  margin-bottom: .75rem;
-  border: 1px solid var(--app-grey);
-  height: 2.25rem;
-}
-button[type="submit"] {
-  width: 100%;
-}
 @media (min-width: 700px) {
   .fly2Box {
     left: 20vw;
@@ -120,9 +96,6 @@ button[type="submit"] {
     width: 30vmin;
     height: 30vmin;
   }  
-  form {
-    width: 60%;
-  }
 }
 @media (min-width: 1200px) {
   .fly2Box {
@@ -136,6 +109,15 @@ button[type="submit"] {
   .BART-Smells-logo {
     animation: App-logo-move 20s linear;
     animation-iteration-count: 1;
+  }
+  .fly {
+    animation: moveFly 5s linear infinite;
+  }
+  .fly2 {
+    animation: circleFly 8s linear infinite;
+  }
+  .fly2Box {
+    animation: flipFlyBox 8s linear infinite;
   }
 }
 

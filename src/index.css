@@ -1,15 +1,34 @@
 :root {
   /* Make color variables */
-  --app-blue: #1099d6;
-  --app-green: #b6ac3f;
-  --app-brown: #a66c2f;
-  --app-brown-dark: #7b471a;
-  --app-white: #f2f2f2;
-  --app-gray-superlight: #ededed;
-  --app-gray-light: #cecece;
-  --app-gray: #8f8f8f;
-  --app-gray-dark: #575757;
-  --app-black: #1d1d1d;
+  --app-blue: rgb(16, 153, 214);
+  --app-green: rgb(182, 172, 63);
+  --app-brown: rgb(166, 108, 47);
+  --app-brown-dark: rgb(123, 71, 26);
+  --app-white: rgb(242,242,242);
+  --app-gray-superlight: rgb(237, 237, 237);
+  --app-gray-light: rgb(206, 206, 206);
+  --app-gray: rgb(143, 143, 143);
+  --app-gray-dark: rgb(87, 87, 87);
+  --app-black: rgb(29, 29, 29);
+  /* translucents */
+  --app-green-tr: rgba(182, 172, 63, 0.75);
+  --app-blue-tr: rgba(16, 153, 214, 0.75);
+  --app-brown-tr: rgba(166, 108, 47, 0.75);
+  --app-brown-dark-tr: rgba(123, 71, 26, 0.75);
+  --app-white-tr:rgba(242,242,242, 0.75);
+  --app-gray-superlight-tr: rgba(237, 237, 237, 0.75);
+  --app-gray-light-tr: rgba(206, 206, 206, 0.75);
+  --app-gray-tr: rgba(143, 143, 143, 0.75);
+  --app-gray-dark-tr: rgba(87, 87, 87, 0.75);
+  --app-black-tr: rgba(29, 29, 29, 0.75);
+
+  /* sizes */
+    --corners: 4px;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 html, body {
     height: 100%;

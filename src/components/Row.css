@@ -15,6 +15,7 @@ thead tr {
 }
 tr {
   font-size: .5em;
+  background-color: rgba(242,242,242, 0.925);
 }
 tr:nth-of-type(odd) {
   background-color: var(--app-gray-light);
