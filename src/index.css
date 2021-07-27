@@ -5,8 +5,11 @@
   --app-brown: #a66c2f;
   --app-brown-dark: #7b471a;
   --app-white: #f2f2f2;
-  --app-gray: #9b9b9b;
-  --app-black: #222222;
+  --app-gray-superlight: #ededed;
+  --app-gray-light: #cecece;
+  --app-gray: #8f8f8f;
+  --app-gray-dark: #575757;
+  --app-black: #1d1d1d;
 }
 html, body {
     height: 100%;

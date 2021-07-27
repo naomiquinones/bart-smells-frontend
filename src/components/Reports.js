@@ -1,6 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
+import Row from './Row';
+
+import axios from 'axios'
 
 const Reports = () => {
+  const [reports, setReports] = React.useState([]);
+
+  const loadReports = async () => {
+      await axios.get(`http://localhost:5000/reports`)
+      .then(response => {
+        console.log(response.data)
+        setReports(response.data)
+      }
+        )
+      .catch(error => console.log(error))
+      .finally(() => console.log('finally'));
+  }
+
+  useEffect(() => {
+    loadReports();
+  }, []);
+
   return (
     <main>
       <h2>View Reports</h2>
@@ -11,16 +32,16 @@ const Reports = () => {
             <th>Date</th>
             <th>Type</th>
             <th>Description</th>
-            <th>Train Direction</th>
+            <th>Train</th>
+            <th>Direction</th>
+            <th>Car&nbsp;#</th>
+            <th>Votes</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1/1/2017</td>
-            <td>New Report</td>
-            <td>This is a new report</td>
-            <td>Richmond/Fremont -&gt; Fremont</td>
-          </tr>
+          {reports.map((report,index) =>
+            <Row key={index} report={report} />
+          )}
         </tbody>
       </table>
     </main>

@@ -92,11 +92,6 @@ main {
   margin-top: 2rem;
   padding: 0 2rem;
 }
-tr {
-  font-size: .5em;
-  padding: .25em 0;
-  border-bottom: 1px solid var(--app-brown);
-}
 form {
   border: 1px solid var(--app-green);
   width: 90%;
