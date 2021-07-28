@@ -35,7 +35,7 @@ const Reports = () => {
             <th>Route</th>
             <th>Direction</th>
             <th>Car&nbsp;#</th>
-            <th>Votes</th>
+            <th colSpan="2">Votes</th>
           </tr>
         </thead>
         <tbody>

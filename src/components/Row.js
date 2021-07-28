@@ -11,6 +11,7 @@ const Row = (props) => {
       <td>{props.report.direction}</td>
       <td>{props.report.car_number}</td>
       <td>{props.report.votes}</td>
+      <td><button className="vote up">+</button> <button className="vote down">-</button></td>
     </tr>
   )
 }

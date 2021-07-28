@@ -46,7 +46,14 @@ td::before {
 	td:nth-of-type(6):before { content: "Car Number"; }
 	td:nth-of-type(7):before { content: "Votes"; }
 
-
+.vote {
+  font-size: 2em;
+  display: inline-block;
+  width: 40%;
+  border: 1px solid var(--app-gray-light);
+  text-align: center;
+  padding: 0;
+}
 
 /* Bring back normal table display */
 @media (min-width: 54em) {

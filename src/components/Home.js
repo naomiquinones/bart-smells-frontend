@@ -41,7 +41,7 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/reports`,{
-      rider_id: Math.round(Math.random()*4),
+      rider_id: Math.round(Math.random()*3) + 1,
       type: selectedType,
       route: selectedRoute.abbr,
       car_number: carNum,
