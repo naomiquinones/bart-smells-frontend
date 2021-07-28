@@ -92,6 +92,12 @@ button[type="submit"]:hover, button[type="submit"]:focus {
   display: inline-block;
   padding: 0 1rem;
 }
+.instructions {
+  font-size: .75em;
+}
+.required {
+  color: var(--app-red);
+}
 @media (min-width: 24rem) {
   .route-selected {
     flex-direction: row;

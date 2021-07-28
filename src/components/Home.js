@@ -40,14 +40,15 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/reports`,{
-      rider_id: Math.round(Math.random()*3) + 1,
-      type: selectedType,
-      route: selectedRoute.abbr,
-      car_number: carNum,
-      description: description,
-      direction: selectedRoute.direction,
-    })
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/reports`, {
+        rider_id: Math.round(Math.random() * 3) + 1,
+        type: selectedType,
+        route: selectedRoute.abbr,
+        car_number: carNum,
+        description: description,
+        direction: selectedRoute.direction,
+      })
       .then((response) => {
         console.log(response);
       })
@@ -77,16 +78,25 @@ const Home = () => {
     <>
       <main>
         <h2>Report an issue</h2>
+        <small className="instructions">
+          <span className="required">Required items</span> marked with an{" "}
+          <span className="required">asterisk *</span>
+        </small>
         <form onSubmit={handleSubmit}>
           <fieldset className="report-type-fieldset">
-            <legend>Type of issue</legend>
+            <legend>
+              Type of issue <span className="required">*</span>
+            </legend>
             {reportInputs}
           </fieldset>
           <fieldset>
             <legend>Route and car number</legend>
-            <label htmlFor="route">Route</label>
+            <label htmlFor="route">
+              Route <span className="required">*</span>
+            </label>
             <div className="route-selection">
               <select
+                required
                 name="route"
                 id="route"
                 onChange={onRouteSelect}
@@ -119,6 +129,7 @@ const Home = () => {
             </div>
             <label htmlFor="car-num">Car Number</label>
             <input
+              placeholder="Enter a car number (see above doors connecting cars)"
               maxLength="5"
               name="car-num"
               type="text"
@@ -129,9 +140,16 @@ const Home = () => {
           </fieldset>
 
           <label htmlFor="description-text" value="">
-            Description
+            Description <span className="required">*</span>
           </label>
-          <textarea value={description} className="report-input" name="description-text" onChange={(e)=> setDescription(e.target.value)} />
+          <textarea
+            required
+            placeholder="Describe the issue"
+            value={description}
+            className="report-input"
+            name="description-text"
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
           <button type="submit">Submit</button>
         </form>
