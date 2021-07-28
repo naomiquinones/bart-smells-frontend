@@ -7,7 +7,7 @@ import Reports from './components/Reports';
 
 import React from 'react';
 // import react-router-dom items
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, NavLink } from 'react-router-dom';
 
 function App() {
   return (
@@ -20,13 +20,12 @@ function App() {
       </header>
       <nav className="App-nav">
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/reports">View Reports</Link></li>
+          <li><NavLink exact to="/" activeClassName="current-page">Home</NavLink></li>
+          <li><NavLink exact to="/reports" activeClassName="current-page">View Reports</NavLink></li>
         </ul>
       </nav>
       <Switch>
         <Route path="/reports" component={Reports} />
-        <Route path="/reports/:reportId" component={Reports} />
         <Route path="/" component={Home} />
       </Switch>
     </div>

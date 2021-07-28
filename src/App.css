@@ -92,6 +92,9 @@ main {
   margin-top: 2rem;
   padding: 0 0.125rem;
 }
+.current-page {
+  background-color: var(--app-green-tr);
+}
 @media (min-width: 300px) {
   main {
     padding: 0 1rem;

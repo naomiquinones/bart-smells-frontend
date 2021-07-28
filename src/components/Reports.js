@@ -16,7 +16,7 @@ const Reports = () => {
         setReports(response.data);
       })
       .catch((error) => console.log(error))
-      .finally(() => console.log("finally"));
+      .finally(() => console.log("Tried to get reports"));
   };
 
   useEffect(() => {
@@ -24,7 +24,6 @@ const Reports = () => {
   }, []);
 
   const vote = (reportId, vote) => {
-    console.log({ reportId, vote });
     axios
       .patch(`${process.env.REACT_APP_BACKEND_URL}/reports/${reportId}/votes`, {
         vote: vote,
@@ -33,7 +32,7 @@ const Reports = () => {
         loadReports();
       })
       .catch((error) => console.log(error))
-      .finally(() => console.log("finally"));
+      .finally(() => console.log("Sent vote"));
   };
 
   return (

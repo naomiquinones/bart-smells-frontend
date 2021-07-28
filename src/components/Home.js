@@ -75,7 +75,6 @@ const Home = () => {
   }, [getBARTRouteList]);
 
   return (
-    <>
       <main>
         <h2>Report an issue</h2>
         <small className="instructions">
@@ -154,7 +153,6 @@ const Home = () => {
           <button type="submit">Submit</button>
         </form>
       </main>
-    </>
   );
 };
 

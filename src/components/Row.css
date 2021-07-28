@@ -53,14 +53,21 @@ td::before {
   text-align: center;
   border: 1px solid var(--app-gray-light);
   text-align: center;
+  box-shadow: 2px 2px 2px inset var(--app-white)
+   -2px -2px 4px inset var(--app-gray-light);
+}
+.vote:hover {
+  background-color: var(--app-gray-superlight-tr);
+  box-shadow: 2px 2px 2px inset var(--app-white)
+   -2px -2px 4px inset var(--app-gray);
 }
 
 /* Bring back normal table display */
 @media (min-width: 54em) {
   .vote {
-    aspect-ratio: 1/1;
-    
+    aspect-ratio: 1/1;    
     width: 100%;
+    max-width: 2em;
   }
   table {
     display: table;
