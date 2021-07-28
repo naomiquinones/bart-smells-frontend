@@ -1,13 +1,26 @@
-import React from 'react';
-import './Input.css'
+import React from "react";
+import "./Home.css";
+import "./Input.css";
 
-const Input = (props) => {
+const Input = ({reportType, selectedType, onTypeChange}) => {
   return (
     <>
-    <label htmlFor={props.name}>{props.label}</label>
-    <input name={props.name} className={props.className} type={props.type} value={props.value} onChange={props.onChange} />
+      <input
+        type="radio"
+        name="report-type"
+        id={`report-type-${reportType}`}
+        value={reportType}
+        checked={selectedType === reportType}
+        onChange={onTypeChange}
+      />
+      <label
+        className="radio-button-label radio-type-select"
+        htmlFor={`report-type-${reportType}`}
+      >
+        {reportType}
+      </label>
     </>
   );
-}
+};
 
 export default Input;

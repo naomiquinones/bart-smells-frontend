@@ -2,21 +2,46 @@ import React, { useState, useEffect, useCallback } from "react";
 import "../App.css";
 import "./Input.css";
 import "./Home.css";
+import "./Option.css";
 
-// import Input from './Input';
+import Option from "./Option";
+import Input from "./Input";
 
 import axios from "axios";
 
 const Home = () => {
+  const [BARTRouteList, setBARTRouteList] = useState([]);
   const [selectedType, setSelectedType] = useState("");
-  const [BARTRouteList, setBARTRouteList] = useState("");
+  const [selectedRoute, setSelectedRoute] = useState({});
+  const [showDirection, setShowDirection] = useState(false);
+  const [carNum, setCarNum] = useState("");
+  const [description, setDescription] = useState("");
+  const reportTypes = ["liquid", "solid", "other", "crime"];
 
   const onTypeChange = (e) => {
     setSelectedType(e.target.value);
   };
   const onRouteSelect = (e) => {
-    setBARTRouteList(e.target.value);
+    let selected = BARTRouteList.find(
+      (route) => route.number === e.target.value
+    );
+    setSelectedRoute(selected);
+    setShowDirection(true);
   };
+
+  const reportInputs = reportTypes.map((reportType, index) => (
+    <Input
+      key={index}
+      reportType={reportType}
+      onTypeChange={onTypeChange}
+      selectedType={selectedType}
+    />
+  ));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  }
 
   const getBARTRouteList = useCallback(() => {
     axios
@@ -29,7 +54,7 @@ const Home = () => {
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => console.log("finally"));
+      .finally(() => console.log("Tried to get BART routes"));
   }, []);
 
   useEffect(() => {
@@ -39,93 +64,63 @@ const Home = () => {
   return (
     <>
       <main>
-        {/* <Input className="reportInput"
-      name="test"
-      type="text"
-      value="report"
-      onChange={(e) => console.log(e.target.value)} /> */}
-        <h2>Make Report</h2>
-        <form>
+        <h2>Report an issue</h2>
+        <form onSubmit={handleSubmit}>
           <fieldset className="report-type-fieldset">
-            <legend>Type of Issue</legend>
-            <input
-              type="radio"
-              name="report-type"
-              id="report-type-1"
-              value="liquid"
-              checked={selectedType === "liquid"}
-              onChange={onTypeChange}
-            />
-            <label
-              className="radio-button-label radio-type-select"
-              htmlFor="report-type-1"
-            >
-              Liquid
-            </label>
-            <input
-              type="radio"
-              name="report-type"
-              id="report-type-2"
-              value="solid"
-              checked={selectedType === "solid"}
-              onChange={onTypeChange}
-            />
-            <label
-              className="radio-button-label radio-type-select"
-              htmlFor="report-type-2"
-            >
-              Solid
-            </label>
-            <input
-              type="radio"
-              name="report-type"
-              id="report-type-3"
-              value="other"
-              checked={selectedType === "other"}
-              onChange={onTypeChange}
-            />
-            <label
-              className="radio-button-label radio-type-select"
-              htmlFor="report-type-3"
-            >
-              Other
-            </label>
-            <input
-              type="radio"
-              name="report-type"
-              id="report-type-4"
-              value="crime"
-              checked={selectedType === "crime"}
-              onChange={onTypeChange}
-            />
-            <label
-              className="radio-button-label radio-type-select"
-              htmlFor="report-type-4"
-            >
-              Crime
-            </label>
+            <legend>Type of issue</legend>
+            {reportInputs}
           </fieldset>
           <fieldset>
-            <legend>Route and direction</legend>
-            <label htmlFor="route">Select route</label>
-            <div className="route-select">
+            <legend>Route and car number</legend>
+            <label htmlFor="route">Route</label>
+            <div className="route-selection">
               <select
                 name="route"
                 id="route"
                 onChange={onRouteSelect}
-                value={BARTRouteList}
+                value={selectedRoute}
               >
-                <option value="liquid">Richmond</option>
+                <optgroup className="option-group" label="Select a route">
+                  {BARTRouteList.map((route, index) => (
+                    <Option key={index} {...route} />
+                  ))}
+                </optgroup>
               </select>
+              <div className="route-selected">
+                <p>Direction: </p>
+                {showDirection && (
+                  <p
+                    className="direction-text"
+                    style={{
+                      backgroundColor: selectedRoute.hexcolor,
+                      color:
+                        selectedRoute.hexcolor === "#FFFF33" ||
+                        selectedRoute.hexcolor === "#D5CFA3"
+                          ? "var(--app-brown-dark)"
+                          : "var(--app-white)",
+                    }}
+                  >
+                    {selectedRoute.abbr} {selectedRoute.direction}
+                  </p>
+                )}
+              </div>
             </div>
+            <label htmlFor="car-num">Car Number</label>
+            <input
+              maxLength="5"
+              name="car-num"
+              type="text"
+              className="report-input car-num-input"
+              value={carNum}
+              onChange={(e) => setCarNum(e.target.value)}
+            />
           </fieldset>
 
-          <label htmlFor="description" value="">
+          <label htmlFor="description-text" value="">
             Description
           </label>
-          <textarea className="reportInput" name="description" />
-          <label htmlFor="route"></label>
-          <input name="route" type="text" className="reportInput" />
+          <textarea value={description} className="report-input" name="description-text" onChange={(e)=> setDescription(e.target.value)} />
+
           <button type="submit">Submit</button>
         </form>
       </main>

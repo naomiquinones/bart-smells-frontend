@@ -1,15 +1,15 @@
 form, fieldset, label, select, input, textarea, button {
   border-radius: var(--corners);
+  color: var(--app-blue);
 }
 form, fieldset, select, input, textarea, button {
   border: 1px solid var(--app-gray-superlight-tr);
 }
 form {
   border: 1px solid var(--app-blue);
-  width: 90%;
   margin: 1rem auto;
-  padding: 1rem;
-  color: var(--app-brown);
+  padding: 0.125rem;
+  background-color: var(--app-white-tr);
 }
 fieldset {
   padding: 0 0 1rem;
@@ -34,13 +34,14 @@ select {
   background-color: var(--app-white-tr);
   background-image: linear-gradient(45deg, var(--app-brown-dark-tr), var(--app-green-tr));
   box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+  font-size: 1.25rem;
 }
 input, textarea {
   background-color: var(--app-white);
   padding: .5em;
   width: 100%;
   margin-bottom: .75rem;
-  border: 1px solid var(--app-grey);
+  border: 1px solid var(--app-blue);
   line-height: 2.25rem;
   color: var(--app-brown);
   font-size: 1rem;
@@ -59,28 +60,6 @@ label {
 label:first-child {
   margin-top: 0;
 }
-input[type="radio"]{
-  appearance: none;
-  opacity: 0;
-  position: fixed;
-  width: 0;
-}
-
-.radio-button-label.radio-type-select {
-  display: inline-block;
-  width: 21%;
-  margin: 0 2%;
-  padding: .5em;
-  border: 1px solid var(--app-blue);
-}
-.radio-button-label.radio-type-select:last-child {
-  margin-right: 0;
-}
-input[type="radio"]:checked + .radio-button-label.radio-type-select {
-  background: linear-gradient(45deg, var(--app-blue), var(--app-green));
-  border-color:var(--app-green);
-  color: var(--app-white);
-}
 
 button[type="submit"] {
   background: radial-gradient(circle, var(--app-gray-superlight), var(--app-brown));
@@ -94,6 +73,38 @@ button[type="submit"]:hover, button[type="submit"]:focus {
   background: radial-gradient(circle, var(--app-green), var(--app-blue));
   color: var(--app-white);
   border-color: var(--app-blue-tr);
+}
+.route-selected {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.route-selected p{
+  /* flex: 100%; */
+  display: inline-block;
+  margin:0;
+  font-size: .75em;
+}
+
+.direction-text {
+  display: inline-block;
+  padding: 0 1rem;
+}
+@media (min-width: 24rem) {
+  .route-selected {
+    flex-direction: row;
+  }
+  /* .route-selected p {
+    flex: 50%;
+  } */
+}
+@media (min-width: 300px) {
+  form {
+    width: 100%;
+    padding: 1rem;
+    transition: all .2s;
+  }
 }
 @media (min-width: 640px) {
   form {

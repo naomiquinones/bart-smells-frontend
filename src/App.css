@@ -15,10 +15,11 @@
   padding: 0;
   background-color: transparent;
   display: flex;
+  flex-direction: column;
 }
 .App-nav li {
-  display: inline-block;
-  width: 50%;
+  display: block;
+  width: 100%;
   text-align: center;
 }
 .App-nav a {
@@ -35,11 +36,9 @@
 
 .App-header {
   background-color: var(--app-white);
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   position: relative;
   z-index: -1;
 }
@@ -87,7 +86,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 main {
   margin-top: 2rem;
-  padding: 0 2rem;
+  padding: 0 0.125rem;
+}
+@media (min-width: 300px) {
+  main {
+    padding: 0 1rem;
+  }
+  .App-nav ul {
+    flex-direction: row;
+  }  
 }
 @media (min-width: 700px) {
   .fly2Box {
