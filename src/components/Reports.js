@@ -33,7 +33,7 @@ const Reports = () => {
             <th>Type</th>
             <th>Description</th>
             <th>Route</th>
-            <th>Destination</th>
+            <th>Direction</th>
             <th>Car&nbsp;#</th>
             <th>Votes</th>
           </tr>
