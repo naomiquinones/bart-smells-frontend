@@ -47,7 +47,7 @@
   position: absolute;
   height: 25vh;
   pointer-events: none;
-  transform: translate(0, 69vh);
+  transform: translate(0, 75vh);
   margin: 0 auto;
 }
 .fly, .fly2 {
@@ -137,7 +137,7 @@ main {
   }
   to {
     height: 25vh;
-    transform: translate(0, 69vh);
+    transform: translate(0, 75vh);
   }
 }
 
