@@ -8,10 +8,13 @@ const Reports = () => {
   const [reports, setReports] = React.useState([]);
 
   const loadReports = async () => {
-      await axios.get(`http://localhost:5000/reports`)
+      await axios.get(`${process.env.REACT_APP_BACKEND_URL}/reports`)
       .then(response => {
         console.log(response.data)
-        setReports(response.data)
+        const sorted = response.data.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        console.log(sorted);
+        // setReports(sorted);
+        setReports(response.data);
       }
         )
       .catch(error => console.log(error))
@@ -21,6 +24,17 @@ const Reports = () => {
   useEffect(() => {
     loadReports();
   }, []);
+
+  const vote = (reportId, vote) => {
+    console.log({reportId, vote})
+    axios.patch(`${process.env.REACT_APP_BACKEND_URL}/reports/${reportId}/votes`, {vote: vote})
+    .then(response => {
+      console.log(response.data)
+      loadReports();
+    })
+    .catch(error => console.log(error))
+    .finally(() => console.log('finally'));
+  }
 
   return (
     <main>
@@ -40,7 +54,7 @@ const Reports = () => {
         </thead>
         <tbody>
           {reports.map((report,index) =>
-            <Row key={index} report={report} />
+            <Row key={index} report={report} vote={vote} />
           )}
         </tbody>
       </table>

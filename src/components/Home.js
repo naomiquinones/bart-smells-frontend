@@ -90,7 +90,7 @@ const Home = () => {
                 name="route"
                 id="route"
                 onChange={onRouteSelect}
-                value={selectedRoute}
+                value={selectedRoute.number}
               >
                 <optgroup className="option-group" label="Select a route">
                   {BARTRouteList.map((route, index) => (

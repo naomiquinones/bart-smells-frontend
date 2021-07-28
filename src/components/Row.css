@@ -47,16 +47,21 @@ td::before {
 	td:nth-of-type(7):before { content: "Votes"; }
 
 .vote {
-  font-size: 2em;
+  font-size: 1.5em;
   display: inline-block;
-  width: 40%;
+  width: 48%;
+  text-align: center;
   border: 1px solid var(--app-gray-light);
   text-align: center;
-  padding: 0;
 }
 
 /* Bring back normal table display */
 @media (min-width: 54em) {
+  .vote {
+    aspect-ratio: 1/1;
+    
+    width: 100%;
+  }
   table {
     display: table;
     width: 100%;
