@@ -36,7 +36,7 @@ const Reports = () => {
   };
 
   return (
-    <main>
+    <>
       <h2>View Reports</h2>
       <table className="report-table">
         <caption>Reports from the past week</caption>
@@ -57,7 +57,7 @@ const Reports = () => {
           ))}
         </tbody>
       </table>
-    </main>
+    </>
   );
 };
 
