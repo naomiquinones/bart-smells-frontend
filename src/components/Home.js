@@ -40,8 +40,20 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-  }
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/reports`,{
+      rider_id: Math.round(Math.random()*4),
+      type: selectedType,
+      route: selectedRoute.abbr,
+      car_number: carNum,
+      description: description,
+      direction: selectedRoute.direction,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error))
+      .finally("Tried to handle submit");
+  };
 
   const getBARTRouteList = useCallback(() => {
     axios
