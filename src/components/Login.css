@@ -1,0 +1,10 @@
+.small-logo {
+  width: 10%;
+}
+
+.login-form label {
+  font-size: 0;
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+}

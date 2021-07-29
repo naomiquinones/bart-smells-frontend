@@ -22,8 +22,29 @@
   width: 100%;
   text-align: center;
 }
+a:link {
+  color: var(--app-blue);
+}
+a:visited {
+  color: var(--app-blue);
+}
+a:hover {
+  color: var(--app-green);
+}
+a:active {
+  color: var(--app-blue);
+}
+.utility {
+  text-align: right;
+}
+.utility a {
+  color: var(--app-brown);
+  font-size: .75em;
+}
+.utility a:hover {
+  color: var(--app-green);
+}
 .App-nav a {
-  text-decoration: none;
   display: block;
   padding: 1rem 0;
   font-size: 2rem;

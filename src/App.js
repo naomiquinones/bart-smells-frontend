@@ -4,9 +4,11 @@ import fly from "./images/fly.svg";
 
 import Home from "./components/Home";
 import Reports from "./components/Reports";
+import CheckLogin from "./components/CheckLogin";
+import Login from "./components/Login"
 import Dashboard from "./components/Dashboard";
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 // import react-router-dom items
 import {
   BrowserRouter as Router,
@@ -17,6 +19,27 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [riderData, setRiderData] = useState(null);
+
+  const fetchData = useCallback(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/riders/${current_rider_id}`)
+      .then((response) => {
+        setRiderData(response.data.rider);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => console.log());
+  }, [current_rider_id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  console.log(riderData);
+
+
   return (
     <Router>
       <div className="App">
@@ -42,14 +65,17 @@ function App() {
           </ul>
         </nav>
         <main>
-          <section className="">
-            <Link exact to="/dashboard">
-              Dashboard
+          <section className="utility">
+            <Link to="/register">Register/Login</Link>
+            <Link to="/dashboard">
+              My Dashboard
             </Link>
           </section>
           <Switch>
+            <CheckLogin isLoggedIn={isLoggedIn} path="/dashboard" component={Dashboard} /> 
+            {/* <Route path="/dashboard" component={Dashboard} /> */}
             <Route path="/reports" component={Reports} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
           </Switch>
         </main>
