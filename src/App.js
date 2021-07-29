@@ -26,7 +26,7 @@ function App() {
   const isLoggedIn = riderData !== null;
   const [currentRiderId, setCurrentRiderId] = useState(null);
 
-  const fetchData = useCallback(() => {
+  const loadCurrentUserData = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/riders/${currentRiderId}`)
       .then((response) => {
@@ -80,7 +80,7 @@ function App() {
           />
             <Route path="/reports" component={Reports} />
             <Route path="/login">
-              <Login currentRiderId={currentRiderId} setCurrentRiderId={setCurrentRiderId} fetchData={fetchData}/>
+              <Login currentRiderId={currentRiderId} setCurrentRiderId={setCurrentRiderId} loadCurrentUserData={loadCurrentUserData}/>
             </Route>
             <Route path="/register">
               <Register currentRiderId={currentRiderId} setCurrentRiderId={setCurrentRiderId} setRiderData={setRiderData}/>
