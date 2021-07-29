@@ -1,27 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import "./Dashboard.css";
 
-import axios from "axios";
-
-const Dashboard = ({ current_rider_id = 3 }) => {
-  const [riderData, setRiderData] = useState(null);
-
-  const fetchData = useCallback(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/riders/${current_rider_id}`)
-      .then((response) => {
-        setRiderData(response.data.rider);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => console.log());
-  }, [current_rider_id]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
+const Dashboard = ({riderData}) => {
   console.log(riderData);
 
   return (
@@ -40,17 +20,11 @@ const Dashboard = ({ current_rider_id = 3 }) => {
             return (
               key !== "id" && key !== "user_id" &&
               <p key={key}>
-                {key}: {report[key]}
+                <strong>{key}:</strong> {report[key]}
               </p>
             );
           });
-          {/* return ([heading, details]);
-           */}
-           return (
-             <>
-               {heading} {details}
-             </>
-           )
+          return ([heading, details]);
         })}
       </div>
       )}

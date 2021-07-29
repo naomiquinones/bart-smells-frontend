@@ -1,0 +1,9 @@
+.alert {
+  margin:0 0 1em;
+  font-size: .7em;
+  color: var(--app-red);
+}
+small {
+  font-size: .7em;
+  color: var(--app-brown-dark);
+}

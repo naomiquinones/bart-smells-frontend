@@ -36,6 +36,7 @@ a:active {
 }
 .utility {
   text-align: right;
+  color: var(--app-blue);
 }
 .utility a {
   color: var(--app-brown);
