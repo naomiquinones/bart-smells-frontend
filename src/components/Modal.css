@@ -1,0 +1,37 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100vh;
+  background: radial-gradient(circle, var(--app-black-tr),rgba(0, 0, 0, 0.6));
+}
+
+.modal-content {
+  position:fixed;
+  background: var(--app-white);
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  padding: 0.5em;
+  display: grid;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.close-button {
+  justify-self: end;
+  background: var(--app-gray-light-tr);
+  color: var(--app-brown-dark);
+  border-radius: 2px;
+  aspect-ratio: 1/1;
+  max-width: 6em;
+}

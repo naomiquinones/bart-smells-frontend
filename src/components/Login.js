@@ -1,58 +1,68 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 
 import "./Login.css";
-
 import axios from "axios";
 
 const Login = (props) => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const isMounted = useRef(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
-      username: username,
-      password: password
-    })
-    .then(response => {
-      props.setCurrentRiderId(response.data.id);
-      props.loadCurrentUserData(response.data.id);
-  })
-    .catch(error => console.log(error))
-    .finally(() => console.log("Tried login"));
-  }
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        isMounted && props.setRiderData(response.data.user);
+        props.history.push("/");
+      })
+      .catch((e) => {
+        console.log(e.response.data.error);
+        setErrorMsg(e.response.data.error);
+      })
+      .finally(() => {
+        console.log("Tried login");
+        setUsername("");
+        setPassword("");
+      });
+  };
+  useEffect(() => () => (isMounted.current = false), []);
 
   return (
     <>
-    <form className="login-form" onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value={username}
-        placeholder="Username"
-      
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        value={password}
-        placeholder="Password"
-      
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit" className="">
-        Sign In
-      </button>
-    </form>
-    <p>Not yet registered? Go to <Link to="/register">register</Link></p>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value={username}
+          placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={password}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" className="">
+          Sign In
+        </button>
+      </form>
+      {errorMsg ? <p className="error-msg">{errorMsg}</p> : <p>
+        Not yet registered? Go to <Link to="/register">register</Link>
+      </p> }
     </>
   );
 };
 
-export default Login;
+export default withRouter(Login);

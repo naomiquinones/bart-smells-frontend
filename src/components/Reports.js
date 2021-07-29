@@ -7,8 +7,8 @@ import axios from "axios";
 const Reports = () => {
   const [reports, setReports] = React.useState([]);
 
-  const loadReports = async () => {
-    await axios
+  const loadReports = () => {
+    axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/reports`)
       .then((response) => {
         // const sorted = response.data.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))

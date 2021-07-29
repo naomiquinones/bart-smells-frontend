@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import "../App.css";
 import "./Input.css";
 import "./Home.css";
@@ -9,14 +10,15 @@ import Input from "./Input";
 
 import axios from "axios";
 
-const Home = () => {
-  const [BARTRouteList, setBARTRouteList] = useState([]);
+const Home = ({ currentRiderId, getRiderData, BARTRouteList, getBARTRouteList }) => {
   const [selectedType, setSelectedType] = useState("");
   const [selectedRoute, setSelectedRoute] = useState({});
   const [showDirection, setShowDirection] = useState(false);
   const [carNum, setCarNum] = useState("");
   const [description, setDescription] = useState("");
   const reportTypes = ["liquid", "solid", "other", "crime"];
+
+  const [errorMsg, setErrorMsg] = useState("");
 
   const onTypeChange = (e) => {
     setSelectedType(e.target.value);
@@ -42,7 +44,7 @@ const Home = () => {
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/reports`, {
-        rider_id: Math.round(Math.random() * 3) + 1,
+        rider_id: currentRiderId,
         type: selectedType,
         route: selectedRoute.abbr,
         car_number: carNum,
@@ -51,108 +53,106 @@ const Home = () => {
       })
       .then((response) => {
         console.log(response);
+        return getRiderData();
       })
-      .catch((error) => console.log(error))
-      .finally("Tried to handle submit");
+      .catch((e) => {
+        console.log(e);
+        setErrorMsg(e.response.data.error);
+      })
+      .finally(() => {
+        setSelectedRoute({});
+        setSelectedType("");
+        setCarNum("");
+        setDescription("");
+      });
   };
-
-  const getBARTRouteList = useCallback(() => {
-    axios
-      .get(
-        "http://api.bart.gov/api/route.aspx?cmd=routes&key=MW9S-E7SL-26DU-VV8V&json=y"
-      )
-      .then((response) => {
-        setBARTRouteList(response.data.root.routes.route);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => console.log("Tried to get BART routes"));
-  }, []);
 
   useEffect(() => {
     getBARTRouteList();
   }, [getBARTRouteList]);
 
-  return (
-      <>
-        <h2>Report an issue</h2>
-        <small className="instructions">
-          <span className="required">Required items</span> marked with an{" "}
-          <span className="required">asterisk *</span>
-        </small>
-        <form onSubmit={handleSubmit}>
-          <fieldset className="report-type-fieldset">
-            <legend>
-              Type of issue <span className="required">*</span>
-            </legend>
-            {reportInputs}
-          </fieldset>
-          <fieldset>
-            <legend>Route and car number</legend>
-            <label htmlFor="route">
-              Route <span className="required">*</span>
-            </label>
-            <div className="route-selection">
-              <select
-                required
-                name="route"
-                id="route"
-                onChange={onRouteSelect}
-                value={selectedRoute.number}
-              >
-                <optgroup className="option-group" label="Select a route">
-                  {BARTRouteList.map((route, index) => (
-                    <Option key={index} {...route} />
-                  ))}
-                </optgroup>
-              </select>
-              <div className="route-selected">
-                <p>Direction: </p>
-                {showDirection && (
-                  <p
-                    className="direction-text"
-                    style={{
-                      backgroundColor: selectedRoute.hexcolor,
-                      color:
-                        selectedRoute.hexcolor === "#FFFF33" ||
-                        selectedRoute.hexcolor === "#D5CFA3"
-                          ? "var(--app-brown-dark)"
-                          : "var(--app-white)",
-                    }}
-                  >
-                    {selectedRoute.abbr} {selectedRoute.direction}
-                  </p>
-                )}
-              </div>
-            </div>
-            <label htmlFor="car-num">Car Number</label>
-            <input
-              placeholder="Enter a car number (see above doors connecting cars)"
-              maxLength="5"
-              name="car-num"
-              type="text"
-              className="report-input car-num-input"
-              value={carNum}
-              onChange={(e) => setCarNum(e.target.value)}
-            />
-          </fieldset>
-
-          <label htmlFor="description-text" value="">
-            Description <span className="required">*</span>
+  return !currentRiderId ? (
+    <Redirect to="/login" />
+  ) : (
+    <>
+      <h2>Report an issue</h2>
+      <small className="instructions">
+        <span className="required">Required items</span> marked with an{" "}
+        <span className="required">asterisk *</span>
+      </small>
+      <form onSubmit={handleSubmit}>
+        <fieldset className="report-type-fieldset">
+          <legend>
+            Type of issue <span className="required">*</span>
+          </legend>
+          {reportInputs}
+        </fieldset>
+        <fieldset>
+          <legend>Route and car number</legend>
+          <label htmlFor="route">
+            Route <span className="required">*</span>
           </label>
-          <textarea
-            required
-            placeholder="Describe the issue"
-            value={description}
-            className="report-input"
-            name="description-text"
-            onChange={(e) => setDescription(e.target.value)}
+          <div className="route-selection">
+            <select
+              required
+              name="route"
+              id="route"
+              onChange={onRouteSelect}
+              value={selectedRoute.number}
+            >
+              <optgroup className="option-group" label="Select a route">
+                {BARTRouteList.map((route, index) => (
+                  <Option key={index} {...route} />
+                ))}
+              </optgroup>
+            </select>
+            <div className="route-selected">
+              <p>Direction: </p>
+              {showDirection && (
+                <p
+                  className="direction-text"
+                  style={{
+                    backgroundColor: selectedRoute.hexcolor,
+                    color:
+                      selectedRoute.hexcolor === "#FFFF33" ||
+                      selectedRoute.hexcolor === "#D5CFA3"
+                        ? "var(--app-brown-dark)"
+                        : "var(--app-white)",
+                  }}
+                >
+                  {selectedRoute.abbr} {selectedRoute.direction}
+                </p>
+              )}
+            </div>
+          </div>
+          <label htmlFor="car-num">Car Number</label>
+          <input
+            placeholder="Enter a car number (see above doors connecting cars)"
+            maxLength="5"
+            name="car-num"
+            type="text"
+            className="report-input car-num-input"
+            value={carNum}
+            onChange={(e) => setCarNum(e.target.value)}
           />
+        </fieldset>
 
-          <button type="submit">Submit</button>
-        </form>
-      </>
+        <label htmlFor="description-text" value="">
+          Description <span className="required">*</span>
+        </label>
+        <textarea
+          required
+          placeholder="Describe the issue"
+          value={description}
+          className="report-input"
+          name="description-text"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+      {errorMsg && <p className="error-msg">{errorMsg}</p>}
+    </>
   );
 };
 

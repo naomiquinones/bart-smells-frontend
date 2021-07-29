@@ -1,29 +1,66 @@
 .user-info {
-  background-color: var(--app-white-tr);
   padding: 0;
-
 }
 .user-info h3{
   text-align: center;
 }
 .user-info span {
   display: block;
-  font-size: .5em;
+  font-size: .75em;
+}
+.reports {
+  background-color: var(--app-white-tr);
 }
 .user-info h4 {
   border-bottom: 1px solid var(--app-gray);
   color: var(--app-blue);
-  margin-bottom: 1em;
+  margin-bottom: .25em;
 }
 .user-info h5 {
   background-color: var(--app-blue-tr);
   color: var(--app-white);
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  padding: .25em;
 }
 .user-info p {
   background-color: var(--app-white-tr);
   font-size: .75em;
   margin:.5em 0 0 0;
+}
+.edit-user-button {
+  background-color: transparent;
+  border: 0 none;
+  font-size: .6em;
+  text-decoration: underline;
+  border-radius: 2px;
+}
+.edit-user-button:hover {
+  background-color: var(--app-blue-tr);
+  color: var(--app-white);
+}
+.user-info-section {
+  display: flex;
+  flex-direction: column;
+}
+.delete-account-button {
+  margin-top: 1em;
+  font-size: .8em;
+  text-decoration: underline;
+}
+.delete-account-button:hover {
+  color: var(--app-red);
+}
+.user-info-section .error-msg {
+  padding: 1rem 0;
+}
+.delete-report {
+  font-size: .8em;
+}
+.delete-report:hover {
+  background: linear-gradient(45deg, var(--app-green-tr), var(--app-gray-superlight-tr));
+  /* color: var(--app-white); */
 }
 strong {
   width: 6em;
@@ -39,7 +76,7 @@ strong {
     margin:.5em 0 0 2em;
     text-indent: -1em;
   }
-  strong {
+  .user-info strong {
     display: inline-block;
   }
   .user-info {

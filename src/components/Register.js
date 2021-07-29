@@ -1,15 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
 
 import './Register.css'
 import axios from "axios";
 
 const Register = (props) => {
+  const isMounted = useRef(true);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [passwordsMatch, setPasswordsMatch] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,12 +22,19 @@ const Register = (props) => {
         email: email
       })
       .then((response) => {
-        props.setCurrentRiderId(response.data.rider.id);
-        props.setRiderData(response.data.rider);
+        isMounted && props.setRiderData(response.data.rider);
+        props.history.push("/");
       })
-      .catch((error) => console.log(error))
-      .finally(() => console.log("Tried registration"));
+      .catch((e) => setErrorMsg(e.response.data.error))
+      .finally(() => {
+        console.log("Tried registration");
+        setUsername("");
+        setPassword("");
+        setConfirmPassword("");
+        setEmail("");
+      });
   };
+  useEffect(() => () => (isMounted.current = false), []);
 
   return (
     <>
@@ -93,11 +102,11 @@ const Register = (props) => {
           Register
         </button>
       </form>
-      <p>
+      { errorMsg ? <p className="error-msg">{errorMsg}</p> : <p>
         Already registered? Go to <Link to="/login">login</Link>
-      </p>
+      </p>}
     </>
   );
 };
 
-export default Register;
+export default withRouter(Register);
