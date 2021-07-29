@@ -1,5 +1,6 @@
 import React from "react";
 import "./Dashboard.css";
+import Vote from "./Vote";
 
 const Dashboard = ({riderData}) => {
   console.log(riderData);

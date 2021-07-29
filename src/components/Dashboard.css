@@ -1,5 +1,7 @@
 .user-info {
+  background-color: var(--app-white);
   padding: 0;
+
 }
 .user-info h3{
   text-align: center;
@@ -8,19 +10,37 @@
   display: block;
   font-size: .5em;
 }
+.user-info h4 {
+  border-bottom: 1px solid var(--app-gray);
+  color: var(--app-blue);
+  margin-bottom: 1em;
+}
+.user-info h5 {
+  background-color: var(--app-blue-tr);
+  color: var(--app-white);
+  font-weight: bold;
+}
 .user-info p {
   font-size: .75em;
-  margin: .25em 0;
+  margin:.5em 0 0 0;
 }
-h4 {
-  border-bottom: 1px solid var(--app-gray);
+strong {
+  width: 6em;
+  /* font-family: 'Courier New', Courier, monospace; */
 }
 @media (min-width: 476px) {
+}
+@media (min-width: 640px) {
   .user-info {
     padding: .5em 2.5%;
   }
-}
-@media (min-width: 640px) {
+  .user-info p {
+    margin:.5em 0 0 .5em;
+    text-indent: -1em;
+  }
+  strong {
+    display: inline-block;
+  }
   .user-info {
     padding: .5em 5%;
   }

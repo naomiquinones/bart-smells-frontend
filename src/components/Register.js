@@ -11,9 +11,9 @@ const Register = (props) => {
   const [email, setEmail] = React.useState("");
   const [passwordsMatch, setPasswordsMatch] = React.useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/riders`, {
         name: username,
         password: password,

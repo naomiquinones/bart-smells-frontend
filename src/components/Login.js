@@ -9,9 +9,9 @@ const Login = (props) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
       username: username,
       password: password
     })
