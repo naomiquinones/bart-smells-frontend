@@ -80,10 +80,10 @@ function App() {
           />
             <Route path="/reports" component={Reports} />
             <Route path="/login">
-              <Login setCurrentRiderId={setCurrentRiderId} fetchData={fetchData}/>
+              <Login currentRiderId={currentRiderId} setCurrentRiderId={setCurrentRiderId} fetchData={fetchData}/>
             </Route>
             <Route path="/register">
-              <Register setCurrentRiderId={setCurrentRiderId} fetchData={fetchData}/>
+              <Register currentRiderId={currentRiderId} setCurrentRiderId={setCurrentRiderId} setRiderData={setRiderData}/>
             </Route>
             <Route path="/" component={Home} />
           </Switch>

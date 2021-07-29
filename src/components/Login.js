@@ -16,8 +16,9 @@ const Login = (props) => {
       password: password
     })
     .then(response => {
-      props.setCurrentRiderId(response.data.user_id);
-    })
+      props.setCurrentRiderId(response.data.id);
+      props.fetchData(response.data.id);
+  })
     .catch(error => console.log(error))
     .finally(() => console.log("Tried login"));
   }

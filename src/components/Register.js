@@ -21,6 +21,7 @@ const Register = (props) => {
       })
       .then((response) => {
         props.setCurrentRiderId(response.data.rider.id);
+        props.setRiderData(response.data.rider);
       })
       .catch((error) => console.log(error))
       .finally(() => console.log("Tried registration"));
