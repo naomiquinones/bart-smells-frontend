@@ -27,7 +27,7 @@ function App() {
   const getBARTRouteList = useCallback(() => {
     axios
       .get(
-        "http://api.bart.gov/api/route.aspx?cmd=routes&key=MW9S-E7SL-26DU-VV8V&json=y"
+        "https://api.bart.gov/api/route.aspx?cmd=routes&key=MW9S-E7SL-26DU-VV8V&json=y"
       )
       .then((response) => {
         setBARTRouteList(response.data.root.routes.route);
