@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "../App.css";
 import "./Input.css";
 import "./Home.css";
@@ -43,7 +43,7 @@ const Home = ({ currentRiderId, getRiderData, BARTRouteList, getBARTRouteList })
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/reports`, {
+      .post(`${import.meta.env.VITE_APP_BACKEND_URL}/reports`, {
         rider_id: currentRiderId,
         type: selectedType,
         route: selectedRoute.abbr,
@@ -72,7 +72,7 @@ const Home = ({ currentRiderId, getRiderData, BARTRouteList, getBARTRouteList })
   }, [getBARTRouteList]);
 
   return !currentRiderId ? (
-    <Redirect to="/login" />
+    <Navigate to="/login" />
   ) : (
     <>
       <h2>Report an issue</h2>

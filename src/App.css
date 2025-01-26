@@ -9,7 +9,8 @@
 .App-nav {
   background-color: var(--app-blue);
 }
-.App-nav ul{
+
+.App-nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -17,37 +18,46 @@
   display: flex;
   flex-direction: column;
 }
+
 .App-nav li {
   display: block;
   width: 100%;
   text-align: center;
 }
+
 a:link {
   color: var(--app-blue);
 }
+
 a:visited {
   color: var(--app-blue);
 }
+
 a:hover {
   color: var(--app-green);
 }
+
 a:active {
   color: var(--app-blue);
 }
+
 .utility {
   text-align: right;
   color: var(--app-blue);
 }
+
 .utility a {
   color: var(--app-brown);
-  font-size: .75em;
+  font-size: 0.75em;
   display: inline-block;
-  padding: 0 .5em;
-  margin: 0 .5em;
+  padding: 0 0.5em;
+  margin: 0 0.5em;
 }
+
 .utility a:hover {
   color: var(--app-green);
 }
+
 .App-nav a {
   display: block;
   padding: 1rem 0;
@@ -58,8 +68,9 @@ a:active {
   width: 100%;
   line-height: 100%;
 }
+
 .App-nav a:hover {
-  background-color:var(--app-green);
+  background-color: var(--app-green);
 }
 
 .App-header {
@@ -78,28 +89,27 @@ a:active {
   transform: translate(0, 75vh);
   margin: 0 auto;
 }
-.fly, .fly2 {
+
+.fly,
+.fly2 {
   width: 50%;
   z-index: inherit;
   position: absolute;
 }
+
 .fly {
   stroke: var(--app-green);
-  transform-origin: 25% 50%;
-  transform: 
-    perspective(0) 
-    translate3d(-50px,40px,60px) 
-    scale3d(.5,.5,.5)
-    rotate3d(0.25,0.5,0.5,0deg)
-    rotateY(0deg)
-    rotate(90deg);
+  transform-origin: 75% 80%;
+  transform: translate3d(-50px, 40px, 60px) scale3d(0.75, 0.75, 0.75) rotateX(8deg) rotateY(28deg) rotateZ(15deg) translateX(-4px);
   transform-style: preserve-3d;
-  left: 0;
-  top: 0;
+  right: 10vw;
+  top: 2vw;
 }
+
 .fly2 {
   transform-origin: center bottom 0;
 }
+
 .fly2Box {
   position: absolute;
   z-index: -1;
@@ -108,18 +118,27 @@ a:active {
   width: 40vmin;
   height: 40vmin;
 }
-h1,h2,h3,h4,h5,h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: lighter;
   color: var(--app-brown-dark);
   margin: 0.5rem 0;
 }
+
 main {
   margin-top: 2rem;
   padding: 0 0.125rem;
 }
+
 .current-page {
   background-color: var(--app-green-tr);
 }
+
 .error-msg {
   background-color: var(--app-white);
   color: var(--app-red);
@@ -135,10 +154,12 @@ main {
   main {
     padding: 0 1rem;
   }
+
   .App-nav ul {
     flex-direction: row;
-  }  
+  }
 }
+
 @media (min-width: 480px) {
   .error-msg {
     width: 80%;
@@ -148,22 +169,26 @@ main {
     align-items: center;
   }
 }
+
 @media (min-width: 700px) {
   .fly2Box {
-    left: 20vw;
-    top: 20vh;
+    left: 25vw;
+    top: 12vh;
     width: 30vmin;
     height: 30vmin;
   }
+
   .error-msg {
     width: 70%;
   }
 }
+
 @media (min-width: 880px) {
   .error-msg {
     width: 60%;
   }
 }
+
 @media (min-width: 1200px) {
   .fly2Box {
     left: 70vw;
@@ -171,22 +196,27 @@ main {
     width: 20vmin;
     height: 20vmin;
   }
+
   .error-msg {
     max-width: 15em;
     width: 50%;
   }
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .BART-Smells-logo {
     animation: App-logo-move 20s linear;
     animation-iteration-count: 1;
   }
+
   .fly {
     animation: moveFly 5s linear infinite;
   }
+
   .fly2 {
     animation: circleFly 8s linear infinite;
   }
+
   .fly2Box {
     animation: flipFlyBox 8s linear infinite;
   }
@@ -199,6 +229,7 @@ main {
     /* z-index: 100; */
     transform: translate(0, 0vh);
   }
+
   to {
     height: 25vh;
     transform: translate(0, 75vh);
@@ -207,19 +238,23 @@ main {
 
 @keyframes moveFly {
   from {
-    transform: rotate3d(0,0.5,0,0deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+    transform: rotate3d(0, 0.5, 0, 0deg) scale3d(0.5, 0.5, 0.5) translate3d(-10px, 20%, 0px);
   }
+
   25% {
-    transform: rotate3d(0,0.5,0,-90deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+    transform: rotate3d(0, 0.5, 0, -90deg) scale3d(0.5, 0.5, 0.5) translate3d(-10px, 20%, 0px);
   }
+
   50% {
-    transform: rotate3d(0,0.5,0,-180deg) scale3d(.5,1,.5) translate3d(-10px,20%,0px);
+    transform: rotate3d(0, 0.5, 0, -180deg) scale3d(0.5, 1, 0.5) translate3d(-10px, 20%, 0px);
   }
+
   75% {
-    transform: rotate3d(0,0.5,0,-270deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+    transform: rotate3d(0, 0.5, 0, -270deg) scale3d(0.5, 0.5, 0.5) translate3d(-10px, 20%, 0px);
   }
+
   to {
-    transform: rotate3d(0,0.5,0,-360deg) scale3d(.5,.5,.5) translate3d(-10px,20%,0px);
+    transform: rotate3d(0, 0.5, 0, -360deg) scale3d(0.5, 0.5, 0.5) translate3d(-10px, 20%, 0px);
   }
 }
 
@@ -227,12 +262,14 @@ main {
   100% {
     transform: rotateZ(-2turn);
   }
- }
- @keyframes flipFlyBox {
-    25% {
-      tranform: rotateX(0.5turn);
-    }
-    75% {
-      transform: rotateX(0.5turn);
+}
+
+@keyframes flipFlyBox {
+  25% {
+    tranform: rotateX(0.5turn);
+  }
+
+  75% {
+    transform: rotateX(0.5turn);
   }
 }

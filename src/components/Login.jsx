@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Login.css";
 import axios from "axios";
@@ -9,27 +9,25 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
-        username: username,
-        password: password,
-      })
-      .then((response) => {
-        isMounted && props.setRiderData(response.data.user);
-        props.history.push("/");
-      })
-      .catch((e) => {
-        console.log(e.response.data.error);
-        setErrorMsg(e.response.data.error);
-      })
-      .finally(() => {
-        console.log("Tried login");
-        setUsername("");
-        setPassword("");
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_URL}/login`, {
+        username,
+        password,
       });
+      if (response && response.data) {
+        props.setRiderData(response.data.user);
+        navigate('/dashboard');
+      } else {
+        setErrorMsg("Invalid username or password");
+      }
+    } catch (error) {
+      console.error('Error logging in', error);
+      setErrorMsg(error.response?.data?.error || "Error logging in");
+    }
   };
   useEffect(() => () => (isMounted.current = false), []);
 
@@ -44,6 +42,7 @@ const Login = (props) => {
           value={username}
           placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
+          autoComplete="on"
         />
         <label htmlFor="password">Password</label>
         <input
@@ -53,6 +52,7 @@ const Login = (props) => {
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="on"
         />
         <button type="submit" className="">
           Sign In
@@ -65,4 +65,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

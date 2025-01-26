@@ -7,16 +7,22 @@ import axios from "axios";
 const Reports = () => {
   const [reports, setReports] = React.useState([]);
 
-  const loadReports = () => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/reports`)
-      .then((response) => {
+  const loadReports = async () => {
+    try {
+      const response = await axios
+      .get(`${import.meta.env.VITE_APP_BACKEND_URL}/reports`);
+      if (response && response.data) {
         // const sorted = response.data.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
         // setReports(sorted);
         setReports(response.data);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => console.log("Tried to get reports"));
+      } else {
+        console.error("No data received");
+      }
+    } catch (error) {
+      console.error("Error getting reports", error);
+    } finally{
+      console.log("Tried to get reports");
+    }
   };
 
   useEffect(() => {
@@ -25,7 +31,7 @@ const Reports = () => {
 
   const vote = (reportId, vote) => {
     axios
-      .patch(`${process.env.REACT_APP_BACKEND_URL}/reports/${reportId}/votes`, {
+      .patch(`${import.meta.env.VITE_APP_BACKEND_URL}/reports/${reportId}/votes`, {
         vote: vote,
       })
       .then((response) => {

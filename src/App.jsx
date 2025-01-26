@@ -1,3 +1,6 @@
+import React, { useState, useCallback } from "react";
+import { Route, Link, Routes, NavLink, useNavigate } from "react-router-dom";
+
 import "./App.css";
 import logo from "./images/logo.svg";
 import fly from "./images/fly.svg";
@@ -9,14 +12,10 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 
-import React, { useState, useCallback } from "react";
-// import react-router-dom items
-import { Route, Link, Switch, NavLink, useHistory } from "react-router-dom";
-
 import axios from "axios";
 
 function App() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [BARTRouteList, setBARTRouteList] = useState([]);
 
@@ -41,7 +40,7 @@ function App() {
   const getRiderData = () => {
     isLoggedIn &&
       axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/riders/${riderData.id}`)
+        .get(`${import.meta.env.VITE_APP_BACKEND_URL}/riders/${riderData.id}`)
         .then((response) => {
           isLoggedIn
             ? setRiderData(response.data.rider)
@@ -54,7 +53,7 @@ function App() {
 
   const logout = () => {
     setRiderData(null);
-    history.push("/login");
+    navigate("/login");
   };
 
   return (
@@ -69,12 +68,12 @@ function App() {
       <nav className="App-nav">
         <ul>
           <li>
-            <NavLink exact to="/" activeClassName="current-page">
+            <NavLink to="/" className={({ isActive }) => (isActive ? "current-page" : "")}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink exact to="/reports" activeClassName="current-page">
+            <NavLink to="/reports" className={({ isActive }) => (isActive ? "current-page" : "")}>
               View Reports
             </NavLink>
           </li>
@@ -92,62 +91,58 @@ function App() {
           )}
           <Link to="/dashboard">My Dashboard</Link>
         </section>
-        <Switch>
-          <Route path="/reports" component={Reports} />
-
-          <CheckLogin
-            exact
+        <Routes>
+          <Route path="/reports" element={<Reports />} />
+          <Route
             path="/dashboard"
-            isLoggedIn={isLoggedIn}
-            render={(props) => (
-              <Dashboard
-                {...props}
-                getBARTRouteList={getBARTRouteList}
-                riderData={riderData}
-                isLoggedIn={isLoggedIn}
-                getRiderData={getRiderData}
-                setRiderData={setRiderData}
-              />
-            )}
+            element={
+              <CheckLogin isLoggedIn={isLoggedIn}>
+                <Dashboard
+                  getBARTRouteList={getBARTRouteList}
+                  riderData={riderData}
+                  isLoggedIn={isLoggedIn}
+                  getRiderData={getRiderData}
+                  setRiderData={setRiderData}
+                />
+              </CheckLogin>
+            }
           />
-
-          <Route path="/login">
-            <Login setRiderData={setRiderData} />
-          </Route>
-          <Route path="/register">
-            <Register setRiderData={setRiderData} />
-          </Route>
-          <CheckLogin
-            exact
+          <Route
+            path="/login"
+            element={<Login setRiderData={setRiderData} />}
+          />
+          <Route
+            path="/register"
+            element={<Register setRiderData={setRiderData} />}
+          />
+          <Route
             path="/logout"
-            isLoggedIn={isLoggedIn}
-            render={(props) => (
-              <Home
-                {...props}
-                currentRiderId={currentRiderId}
-                setRiderData={setRiderData}
-                getRiderData={getRiderData}
-              />
-            )}
+            element={
+              <CheckLogin isLoggedIn={isLoggedIn}>
+                <Home
+                  currentRiderId={currentRiderId}
+                  setRiderData={setRiderData}
+                  getRiderData={getRiderData}
+                />
+              </CheckLogin>
+            }
           />
-
-          <CheckLogin
-            exact
+          <Route
             path="/"
-            isLoggedIn={isLoggedIn}
-            render={(props) => (
-              <Home
-                {...props}
-                BARTRouteList={BARTRouteList}
-                setBARTRouteList={setBARTRouteList}
-                getBARTRouteList={getBARTRouteList}
-                currentRiderId={currentRiderId}
-                setRiderData={setRiderData}
-                getRiderData={getRiderData}
-              />
-            )}
+            element={
+              <CheckLogin isLoggedIn={isLoggedIn}>
+                <Home
+                  BARTRouteList={BARTRouteList}
+                  setBARTRouteList={setBARTRouteList}
+                  getBARTRouteList={getBARTRouteList}
+                  currentRiderId={currentRiderId}
+                  setRiderData={setRiderData}
+                  getRiderData={getRiderData}
+                />
+              </CheckLogin>
+            }
           />
-        </Switch>
+        </Routes>
       </main>
     </div>
   );

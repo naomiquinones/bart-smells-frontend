@@ -35,3 +35,7 @@
   aspect-ratio: 1/1;
   max-width: 6em;
 }
+
+.close-button:hover {
+  background: var(--app-gray-dark-tr);
+}

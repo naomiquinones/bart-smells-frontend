@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Modal from "./Modal";
 import "./Dashboard.css";
 
@@ -18,7 +18,7 @@ const Dashboard = ({ riderData, isLoggedIn, getRiderData, setRiderData, getBARTR
 
   const deleteReport = (reportId) => {
     axios
-      .delete(`${process.env.REACT_APP_BACKEND_URL}/reports/${reportId}`)
+      .delete(`${import.meta.env.VITE_APP_BACKEND_URL}/reports/${reportId}`)
       .then((response) => {
         console.log("report deleted", response);
         getBARTRouteList();
@@ -37,7 +37,7 @@ const Dashboard = ({ riderData, isLoggedIn, getRiderData, setRiderData, getBARTR
   const cancelAccount = () => {
     console.log("cancelling account for", riderData.name);
     axios
-      .delete(`${process.env.REACT_APP_BACKEND_URL}/riders/${riderData.id}`)
+      .delete(`${import.meta.env.VITE_APP_BACKEND_URL}/riders/${riderData.id}`)
       .then((response) => {
         console.log("account deleted", response);
         setRiderData(null);
@@ -54,7 +54,7 @@ const Dashboard = ({ riderData, isLoggedIn, getRiderData, setRiderData, getBARTR
   };
 
   return !isLoggedIn ? (
-    <Redirect to="/login" />
+    <Navigate to="/login" />
   ) : (
     <>
       <h2>Dashboard</h2>
