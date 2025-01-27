@@ -20,7 +20,7 @@ const Login = (props) => {
       });
       if (response && response.data) {
         props.setRiderData(response.data.user);
-        navigate('/dashboard');
+        navigate('/');
       } else {
         setErrorMsg("Invalid username or password");
       }
