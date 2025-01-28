@@ -19,6 +19,6 @@ npm run start
 ```
 
 **2025 Updates**
-This project previously used the react-scripts library installed by create-react-app and was converted to use Vite. Other dependencies were updated as well, so some tinkering was necessary to get it to work again. And notes were added to this README.
+This project previously used the react-scripts library installed by create-react-app and was converted to use Vite. Other dependencies were updated as well, which required updating the code to get it to work again. This README was updated with instructions and description of the project.
 
-A media query checks the `prefers-reduced-motion`, and some browsers may block these. If you are unable to see the animations, please comment out the media query in the App.css file that starts with `@media (prefers-reduced-motion: no-preference) {` and its corresponding closing brace `}`.
+Custom CSS features include mobile-friendly tables and animations of background images. A media query checks the `prefers-reduced-motion`, and some browsers may block these. If you are unable to see the animations, please comment out the media query in the App.css file that starts with `@media (prefers-reduced-motion: no-preference) {` and its corresponding closing brace `}`.
